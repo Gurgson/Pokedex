@@ -4,17 +4,18 @@ import LandingOption from "../components/LandingOption/LandingOption";
 import evee from "./../assets/evee.png";
 import pikachu from "./../assets/pikachu.png";
 import { flexCenter } from "../styles/mixins";
-import ImgDecoration, {
+import ImgDecoration from "./../components/Decorations/ImgDecoration/ImgDecoration";
+import {
   ImgSizes,
   ImgHorizontalPosition,
   ImgVerticalPosition,
-} from "./../components/Decorations/ImgDecoration/ImgDecoration";
+} from "../enums/ImgDecoration";
 
 const Landing: FC = () => {
   return (
     <Wrapper>
       <LandingOption
-        to="pokemons"
+        to="pokemon"
         wrapper={{
           bgColor: "#804000",
         }}

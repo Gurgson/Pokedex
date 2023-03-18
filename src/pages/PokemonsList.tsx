@@ -1,13 +1,39 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import GridSelectionLayout from "../layout/GridSelectionLayout/GridSelectionLayout";
 import styled from "styled-components";
 import { flexCenter } from "../styles/mixins";
-
+import PokemonListItem from "../components/Pokemon/PokemonListItem";
+interface PokemonData {
+  name: string;
+}
 const PokemonsList = () => {
-  const [display, setDisplay] = useState();
+  const [pokemon, setPokemon] = useState<PokemonData[] | null>(null);
+  const [page, setPage] = useState<number>(0);
+  const [limitElementsPerPage, setLimit] = useState<number>(20);
+  useEffect(() => {
+    fetch("https://pokeapi.co/api/v2/pokemon")
+      .then((response) => response.json())
+      .then((data) => {
+        setPokemon(data.results);
+        console.log(data.results);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+  if (!pokemon) return <> Nie można załadować pokemonów </>;
   return (
     <Wrapper>
-      <DataContainer></DataContainer>
+      <DataContainer>
+        <TopPanel>
+          <div>Switch</div>
+          <div>Search bar</div>
+        </TopPanel>
+
+        <PokemonList>
+          {pokemon.map((data: PokemonData, index: number) => (
+            <PokemonListItem name={data.name} key={index} />
+          ))}
+        </PokemonList>
+      </DataContainer>
     </Wrapper>
   );
 };
@@ -24,5 +50,14 @@ const DataContainer = styled.div`
   width: 80%;
   position: relative;
   overflow-y: auto;
+`;
+const TopPanel = styled.div`
+  display: flex;
+`;
+const PokemonList = styled.div`
+  flex: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 export default PokemonsList;
