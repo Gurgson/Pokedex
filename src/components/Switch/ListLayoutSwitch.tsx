@@ -1,10 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import styled from "styled-components";
 
 interface ISwitchProps {
-  leftIcon: React.ReactNode | string;
-  rightIcon: React.ReactNode | string;
-  onClick: React.MouseEventHandler;
+  buttons: ReactNode[];
 }
 
 const Switch: FC<ISwitchProps> = () => {

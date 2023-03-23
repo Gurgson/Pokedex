@@ -5,7 +5,7 @@ interface Type {
   };
 }
 
-export interface Pokemon {
+export interface PokemonDetails {
   name: string;
   id: number;
   sprites: {
@@ -15,4 +15,9 @@ export interface Pokemon {
     back_shiny?: string;
   };
   types: [Type, Type | undefined];
+}
+export interface PokemonListData {
+  id: number;
+  name: string;
+  url: string;
 }

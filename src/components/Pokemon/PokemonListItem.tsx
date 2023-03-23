@@ -1,5 +1,5 @@
 import React, { FC, useContext, useEffect, useState } from "react";
-import { Pokemon } from "./../../interfaces/Pokemon";
+import { PokemonDetails } from "./../../interfaces/Pokemon";
 import styled from "styled-components";
 import ImgDecoration from "../Decorations/ImgDecoration/ImgDecoration";
 import {
@@ -20,16 +20,16 @@ interface props {
   layout?: layoutOption;
 }
 const PokemonListItem: FC<props> = (props) => {
-  const [pokemonDetails, setPokemon] = useState<Pokemon | null>(null);
+  ///data
+  const [pokemonDetails, setPokemon] = useState<PokemonDetails | null>(null);
   const { pokemon } = useContext(AppDataContext);
-  console.log(pokemon);
-  console.log(pokemonDetails);
+  ///fetching data
   useEffect(() => {
     async function fetchPokemon() {
       const response = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${props.name}`
       );
-      const data: Pokemon = await response.json();
+      const data: PokemonDetails = await response.json();
 
       setPokemon(data);
       pokemon[data.id] = data;
@@ -38,9 +38,8 @@ const PokemonListItem: FC<props> = (props) => {
     fetchPokemon();
   }, [props.name]);
   if (!pokemonDetails) {
-    return <div>error();</div>;
+    return <div>Loadin placeholder...</div>;
   }
-  debugger;
   return (
     <StyledListElement>
       <ImgDecoration
@@ -49,6 +48,7 @@ const PokemonListItem: FC<props> = (props) => {
         verticalPosition={ImgVerticalPosition.center}
         path={pokemonDetails.sprites.front_default}
       />
+      <p>#{pokemonDetails.id}</p>
       <p>{pokemonDetails.name}</p>
       <PokemonTypes>
         <PokemonType type={pokemonDetails.types[0].type.name} isSmall={true} />
@@ -64,7 +64,7 @@ const PokemonListItem: FC<props> = (props) => {
     </StyledListElement>
   );
 };
-const StyledListElement = styled.div`
+const StyledListElement = styled.li`
   width: 80%;
   height: 5rem;
   position: relative;
@@ -73,6 +73,7 @@ const StyledListElement = styled.div`
   align-items: center;
   background-color: lightblue;
   margin: 5rem auto;
+  padding: 0 5rem;
   border: 1px solid white;
   text-transform: uppercase;
 `;
@@ -82,4 +83,4 @@ const PokemonTypes = styled.div`
   justify-content: space-evenly;
 `;
 
-export default PokemonListItem;
+export default React.memo(PokemonListItem);

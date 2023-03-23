@@ -1,12 +1,12 @@
 import React, { createContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Pokemon } from "./interfaces/Pokemon";
+import { PokemonDetails } from "./interfaces/Pokemon";
 import Landing from "./pages/Landing";
 import PokemonAbout from "./pages/PokemonAbout";
-import PokemonsList from "./pages/PokemonsList";
+import PokemonList from "./pages/PokemonList";
 
 interface IDataStorage {
-  pokemon: Pokemon[];
+  pokemon: PokemonDetails[];
 }
 const initialDataStorage: IDataStorage = {
   pokemon: [],
@@ -20,7 +20,7 @@ function App() {
         <Routes>
           <Route index path="/" element={<Landing />} />
 
-          <Route path="/pokemon" element={<PokemonsList />} />
+          <Route path="/pokemon" element={<PokemonList />} />
           <Route path="pokemon/:query" element={<PokemonAbout />} />
         </Routes>
       </AppDataContext.Provider>
