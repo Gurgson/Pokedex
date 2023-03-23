@@ -40,10 +40,10 @@ const StyledLink = styled(Link)`
   ${flexCenter}
 `;
 const Wrapper = styled.div<IWrapper>`
-  --bg-color: ${(props) => props.bgColor};
+  --bg-color: ${(props) => props.bgColor + "D9"};
+
   height: 100%;
   width: 50vw;
-  opacity: 0.9;
   background-image: url("animated_shapes_bg.svg");
   background-color: var(--bg-color);
   color: #fefefe;
@@ -58,7 +58,6 @@ const Wrapper = styled.div<IWrapper>`
   ${flexCenter}
   &:hover {
     transition: 0.7s;
-
     border: 3px solid black;
   }
 `;
