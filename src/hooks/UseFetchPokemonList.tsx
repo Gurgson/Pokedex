@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AppDataContext } from "../App";
 import { PokemonDetails, PokemonListData } from "../interfaces/Pokemon";
 
 interface IParams {
@@ -6,7 +7,7 @@ interface IParams {
   offset: number;
 }
 
-const UseFetchPokemons = (params: IParams) => {
+const UseFetchPokemon = (params: IParams) => {
   const limit = params.limit || 20;
   const offset = params.offset;
   const endpoint = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
@@ -16,6 +17,7 @@ const UseFetchPokemons = (params: IParams) => {
   const [err, setError] = useState<Error | null>(null);
 
   useEffect(() => {
+    console.log(pokemonList);
     const fetchPokemonList = async () => {
       setIsLoading(true);
       setError(null);
@@ -35,4 +37,4 @@ const UseFetchPokemons = (params: IParams) => {
   return { pokemonList, isLoading, err };
 };
 
-export default UseFetchPokemons;
+export default UseFetchPokemon;

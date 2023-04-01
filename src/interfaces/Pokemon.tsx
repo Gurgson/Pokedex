@@ -1,13 +1,16 @@
+import { PokemonTypeColor } from "../enums/PokemonTypes";
+
 interface Type {
   slot: number;
   type: {
-    name: string;
+    name: PokemonTypeColor;
   };
 }
 
 export interface PokemonDetails {
   name: string;
   id: number;
+  order: number;
   sprites: {
     front_default: string;
     front_shiny?: string;

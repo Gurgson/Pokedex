@@ -4,7 +4,8 @@ import { flexCenter } from "../styles/mixins";
 import PokemonListItem from "../components/Pokemon/PokemonListItem";
 import PaginationItem from "../components/Pagination/PaginationItem";
 import { PokemonDetails, PokemonListData } from "../interfaces/Pokemon";
-import UseFetchPokemons from "../hooks/UseFetchPokemonList";
+import UseFetchPokemon from "../hooks/UseFetchPokemonList";
+import PixelButton from "../components/PixelButton/PixelButton";
 
 const PokemonsList = () => {
   //data
@@ -13,19 +14,19 @@ const PokemonsList = () => {
   const [pokemon, setPokemon] = useState<PokemonListData[]>([]);
 
   //rendering pagination buttons
-  const paginationItems = [5, 10, 20, 50, 10000].map((limit, index) => {
+  const paginationItems = [5, 10, 20, 50, 100000].map((limit, index) => {
     return (
       <PaginationItem
         key={index}
         limit={limit}
         handleClick={setLimit}
-        alias={limit === 10000 ? "All" : ""}
+        alias={limit > 50 ? "All" : ""}
       />
     );
   });
 
   //fetching pokemon list and loading pokemon
-  const { pokemonList, isLoading, err } = UseFetchPokemons({
+  const { pokemonList, isLoading, err } = UseFetchPokemon({
     limit: limitElementsPerPage,
     offset: offset,
   });
@@ -33,12 +34,6 @@ const PokemonsList = () => {
     if (pokemonList.length > 0 && !isLoading)
       setPokemon((pokemon) => [...pokemon, ...pokemonList]);
   }, [pokemonList]);
-
-  // const observer = useRef();
-  // const lastPokemonElement = useCallback((lastPokemon) =>{
-  //   console.log(lastPokemon);
-  // });
-  //rendering component
   if (isLoading && pokemon.length === 0) return <p>Pokemon loading</p>;
   return (
     <Wrapper>
@@ -50,19 +45,18 @@ const PokemonsList = () => {
             {paginationItems}
           </PaginationContainer>
         </TopPanel>
-
         <PokemonList>
           {pokemon.map((item, index) => (
             <PokemonListItem name={item.name} key={item.name} />
           ))}
         </PokemonList>
-        <StyledButton
-          onClick={() => {
+        <PixelButton
+          handleClick={() => {
             setOffset(pokemon.length || 20);
           }}
         >
-          {isLoading ? "Fetching..." : "load more"}
-        </StyledButton>
+          {isLoading ? "Fetching..." : "Load more"}
+        </PixelButton>
       </DataContainer>
     </Wrapper>
   );
@@ -78,25 +72,8 @@ const DataContainer = styled.div`
   border-radius: 4rem;
   height: 80%;
   width: 80%;
-  position: relative;
-  overflow-y: auto;
-  scrollbar-width: auto;
-  scrollbar-color: #2a1f7a transparent;
   z-index: 1;
-  /* Chrome, Edge, and Safari */
-  &::-webkit-scrollbar {
-    width: 16px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #2a1f7a;
-    border-radius: 10px;
-    border: 3px solid white;
-  }
+  position: relative;
 `;
 const TopPanel = styled.div`
   display: flex;
@@ -116,9 +93,29 @@ const TopPanel = styled.div`
 `;
 const PokemonList = styled.div`
   flex: 100%;
+  max-height: 64vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  overflow-y: auto;
+  overflow-y: auto;
+  scrollbar-width: auto;
+  scrollbar-color: #2a1f7a transparent;
+
+  // Chrome, Edge, and Safari
+  &::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #2a1f7a;
+    border-radius: 10px;
+    border: 3px solid white;
+  }
 `;
 const PaginationContainer = styled.div`
   ${flexCenter}
@@ -126,45 +123,6 @@ const PaginationContainer = styled.div`
   flex-wrap: wrap;
   & > p {
     flex: 100%;
-  }
-`;
-const StyledButton = styled.button`
-  font-size: 1.2em;
-  display: block;
-  margin: 1rem auto;
-  width: 200px;
-  height: 70px;
-  background: #06c1de;
-  border: 0px;
-  text-transform: uppercase;
-  position: relative;
-  box-shadow: inset -4px 2px 1px 1px grey, inset -4px -2px 1px 1px lightgray,
-    inset 4px 0px 1px 1px lightgray;
-
-  &:hover {
-    cursor: pointer;
-    background-color: #06b6d1;
-  }
-  &::after {
-    content: " ";
-    background-color: black;
-    position: absolute;
-    z-index: -1;
-    left: -2.5%;
-    top: 0;
-    width: 105%;
-    height: 100%;
-  }
-
-  &::before {
-    content: " ";
-    background: black;
-    position: absolute;
-    z-index: -1;
-    left: 0;
-    top: -5%;
-    width: 100%;
-    height: 110%;
   }
 `;
 

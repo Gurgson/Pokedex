@@ -26,7 +26,7 @@ const ImgDecoration: FC<IImgDecorationProps> = ({
   return (
     <StyledImg
       src={path}
-      alt={alt}
+      alt={path ? alt : path}
       size={size}
       verticalPosition={verticalPosition}
       horizontalPosition={horizontalPosition}
