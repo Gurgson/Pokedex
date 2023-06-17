@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import styled from "styled-components";
 import {
   ImgSizes,
@@ -26,7 +26,7 @@ const ImgDecoration: FC<IImgDecorationProps> = ({
   return (
     <StyledImg
       src={path}
-      alt={alt}
+      alt={path ? alt : path}
       size={size}
       verticalPosition={verticalPosition}
       horizontalPosition={horizontalPosition}

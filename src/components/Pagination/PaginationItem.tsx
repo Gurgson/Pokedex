@@ -16,5 +16,11 @@ const PaginationItem: FC<props> = (props) => {
 
 const StyledButton = styled.button`
   background-color: lightblue;
+  margin: 0 1px;
+  cursor: pointer;
+  border: 3px solid black;
+  &:focus-within {
+    background-color: red;
+  }
 `;
 export default PaginationItem;

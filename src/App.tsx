@@ -6,10 +6,10 @@ import PokemonAbout from "./pages/PokemonAbout";
 import PokemonList from "./pages/PokemonList";
 
 interface IDataStorage {
-  pokemon: PokemonDetails[];
+  pokemon: Map<string, PokemonDetails>;
 }
 const initialDataStorage: IDataStorage = {
-  pokemon: [],
+  pokemon: new Map(),
 };
 export const AppDataContext = createContext<IDataStorage>(initialDataStorage);
 
