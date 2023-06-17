@@ -8,7 +8,7 @@ interface IProps {
 }
 const PokemonType: FC<IProps> = (props) => {
   return (
-    <StyledPokemonType isSmall={props.isSmall} type={props.type}>
+    <StyledPokemonType data-testid="pokemon-type" isSmall={props.isSmall} type={props.type}>
       {props.type as string}
     </StyledPokemonType>
   );
@@ -20,5 +20,6 @@ const StyledPokemonType = styled.div<IProps>`
   margin: 1rem 0;
   background-color: var(--bg-color);
   padding: var(--padding);
+  
 `;
 export default PokemonType;
