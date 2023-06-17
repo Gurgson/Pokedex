@@ -25,8 +25,8 @@ const LandingOption: FC<ILandingPageItem> = ({
   children,
 }) => {
   return (
-    <StyledLink to={to}>
-      <Wrapper bgColor={wrapper.bgColor}>
+    <StyledLink to={to} data-testid="landing-option-wrapper">
+      <Wrapper bgColor={wrapper.bgColor} data-testid="landing-option-children">
         {description}
         {children}
       </Wrapper>
