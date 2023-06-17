@@ -7,7 +7,7 @@ interface IParams {
 }
 
 const UseFetchPokemonDetails = (params: IParams) => {
-  const endpoint = `https://pokeapi.co/api/v2/pokemon/${params.query}`;
+  const endpoint = `https://pokeapi.co/api/v2/pokemon/${params.query.toLowerCase()}`;
   const pokemonContext = useContext(AppDataContext).pokemon;
   const [pokemonDetails, setDetails] = useState<PokemonDetails | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -18,8 +18,7 @@ const UseFetchPokemonDetails = (params: IParams) => {
       setError(null);
       fetch(endpoint)
         .then((response) => response.json())
-        .then((data) => {
-          console.log(pokemonContext);
+        .then((data: PokemonDetails) => {
           pokemonContext.set(data.name, data);
           setDetails(data);
           setIsLoading(false);
@@ -30,7 +29,6 @@ const UseFetchPokemonDetails = (params: IParams) => {
         });
     };
     const pokemon = pokemonContext.get(params.query);
-    console.log("pokemon szukany", pokemon);
     if (pokemon) {
       setDetails(pokemon);
     } else {

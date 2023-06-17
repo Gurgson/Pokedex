@@ -1,7 +1,7 @@
 export enum ImgSizes {
   small = "15rem",
-  medium = "25rem",
-  big = "35rem",
+  medium = "20rem",
+  big = "25rem",
 }
 export enum ImgVerticalPosition {
   top = 0,

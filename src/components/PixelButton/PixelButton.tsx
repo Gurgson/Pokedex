@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import styled from "styled-components";
 
 interface IPixelButton {
-  children: string;
+  children: React.ReactNode;
   handleClick: React.MouseEventHandler;
 }
 
