@@ -1,32 +1,33 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
 ## [Unreleased]
 
-### Added
+## [2023-06-17]
 
-- Creating menu where you can choose what to load
-- Loading pokemon list
-- Paginate loading
+### Added
+- Implemented tests.
 
 ### Changed
+- Added list layouts.
 
--
+## [2023-04-01]
 
-### Deprecated
+### Changed
+- Pokemon once downloaded are now saved.
 
--
+## [2023-03-23]
 
-### Removed
+### Added
+- Displaying Pokemon list.
 
--
+## [2023-03-18]
 
-### Fixed
+### Added
+- First version of Pokemon list.
+- Fetching API data.
+- Restructurization of interfaces/enums.
 
--
+## [2023-03-14]
 
-### Security
+### Added
+- Initial project.
